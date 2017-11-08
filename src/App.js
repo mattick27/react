@@ -1,30 +1,35 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import './App.css';
+import React, { Component } from 'react'
+import About from './pages/about'
 
 class App extends Component {
-  handleSubmit(event) {
-    console.log("Submitted values are: ",
-                event.target.name.value);
-    event.preventDefault();
+
+  constructor(props){
+    super(props)
+    this.state = {
+      data :'null',
+      payload : [],
+    }
   }
+
   render() {
+    const change=(e)=>{
+      this.setState({data : e.target.value})
+    }
+    const click=()=>{
+      this.setState({payload : this.state.payload.concat(this.state.data)})
+      console.log(this.state.payload)
+    }
     return (
-      ReactDOM.render(
     <div>
-      <form onSubmit={this.handleSubmit}>
-      <div className="formGroup">
-        Text : <input name="name" type="text" />
-      </div>
-      <button type="submit"> Submit </button>
-    </form>
-    </div>,
-  	document.getElementById('root')
-	)
-    );
+        <input onChange={change} type='text' />
+        <button onClick={click} > summit </button>
+        <About a={this.state.payload} />
+    </div>
+	
+    )
   }
 }
 
 
 
-export default App;
+export default App
