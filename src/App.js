@@ -1,35 +1,36 @@
 import React, { Component } from 'react'
 import About from './pages/about'
-
+import 'bulma/css/bulma.css'
 class App extends Component {
-
   constructor(props){
     super(props)
     this.state = {
-      data :'null',
-      payload : [],
+      hide : true,
+      opa : 1,
+      count : 0,
     }
   }
 
+  
   render() {
-    const change=(e)=>{
-      this.setState({data : e.target.value})
+    const a = () =>{
+      setTimeout(()=>{
+        if(this.state.count < 10){
+          this.setState({opa : this.state.opa - 0.1,count : this.state.count + 1})
+          a()
+        }
+      },500)
     }
-    const click=()=>{
-      this.setState({payload : this.state.payload.concat(this.state.data)})
-      console.log(this.state.payload)
-    }
+
     return (
-    <div>
-        <input onChange={change} type='text' />
-        <button onClick={click} > summit </button>
-        <About a={this.state.payload} />
+    <div style={{margin : '5rem'}}>
+      <p style={{opacity : this.state.opa}} >Hello  {this.state.opa}</p>
+      <a className ='button is-info'> click</a>
+      
+      <a onClick={a} className ='button is-info'> click</a>
     </div>
-	
     )
   }
 }
-
-
 
 export default App
